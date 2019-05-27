@@ -20,9 +20,8 @@ class Shoppinglist extends Component {
         // this.cranberry.current.reset();
     }
 
-    getPurchaseList() {
-
-        return this.shoppingList.current.getPurchaseList()
+    getPurchaseList = () => {
+        return this.state.refs.map((item) => item.state.quantity);
     }
 
     render() {

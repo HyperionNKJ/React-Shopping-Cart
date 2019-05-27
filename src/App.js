@@ -33,8 +33,9 @@ class App extends Component {
       });
     }
 
-    getPurchaseList() {
-        return this.shoppingList.current.getPurchaseList()
+    getPurchaseList = () => {
+        return []
+        // return this.shoppingList.current.getPurchaseList() // WHY NOT WORKING?
     }
 
     render() {

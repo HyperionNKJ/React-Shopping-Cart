@@ -12,15 +12,20 @@ class CheckoutButton extends Component {
     }
 
     totalPrice = () => {
-        const {numApple, numBanana, numCranberry } = this.props;
-        return numApple * 1 + numBanana * 2 + numCranberry * 3;
+        let i, totalPrice = 0;
+        const purchased = this.props.purchaseList()
+        for (i = 0; i < purchased.length; i ++) {
+            totalPrice += (purchased[i] * (i + 1))
+        }
+        return totalPrice
     }
 
     render() {
+        const visibilityState = this.state.hasCheckout ? 'visible' : 'hidden';
         return (
             <div>
                 <button onClick={this.showPrice}>Checkout!</button>
-                <h3 hidden={!this.hasCheckout}>Total: {this.totalPrice()} </h3>
+                <h3 style={{visibility: visibilityState}}>Total: {this.totalPrice()} </h3>
             </div>
         );
     }
