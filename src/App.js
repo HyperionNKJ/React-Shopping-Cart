@@ -33,6 +33,10 @@ class App extends Component {
       });
     }
 
+    getPurchaseList() {
+        return this.shoppingList.current.getPurchaseList()
+    }
+
     render() {
       return (
           <div style={container}>
@@ -43,7 +47,7 @@ class App extends Component {
                 reset={this.handleReset}
             />
             <button onClick={this.handleReset}>Reset</button>
-            <CheckoutButton></CheckoutButton>
+            <CheckoutButton purchaseList={this.getPurchaseList}/>
           </div>
       )
     }
