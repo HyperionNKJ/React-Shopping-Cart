@@ -1,26 +1,57 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
 import './App.css';
+import Shoppinglist from './code/Shoppinglist'
+import CheckoutButton from './code/CheckoutButton'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+
+    constructor(props) {
+        super(props);
+        this.shoppingList = React.createRef();
+    }
+
+    state = {
+      numItems: 0
+    };
+
+    handleReset = () => {
+      this.setState({
+          numItems: 0
+      });
+      this.shoppingList.current.reset();
+    }
+
+    handleIncrement = () => {
+      this.setState({
+        numItems: this.state.numItems + 1
+      });
+    }
+
+    handleDecrement = () => {
+      this.setState({
+        numItems: this.state.numItems - 1
+      });
+    }
+
+    render() {
+      return (
+          <div style={container}>
+            <h3> You have {this.state.numItems} items in your cart.</h3>
+            <Shoppinglist ref = {this.shoppingList}
+                increment={this.handleIncrement}
+                decrement={this.handleDecrement}
+                reset={this.handleReset}
+            />
+            <button onClick={this.handleReset}>Reset</button>
+            <CheckoutButton></CheckoutButton>
+          </div>
+      )
+    }
+}
+
+const container = {
+  width: '40%',
+  margin: '10px'
 }
 
 export default App;
